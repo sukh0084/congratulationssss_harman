@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations Harmandeep 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #c0384b;
+    --rose-light: #f7c5ce;
+    --rose-pale: #fff0f2;
+    --gold: #c9a84c;
+    --gold-light: #f5e6c0;
+    --deep: #2a0a12;
+    --cream: #fdf8f0;
+    --blush: #f9e8ec;
+    --text: #3d1520;
+    --muted: #7a4050;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── Particles canvas ── */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  /* ── Music button ── */
+  #music-btn {
+    position: fixed; top: 20px; right: 24px; z-index: 999;
+    background: rgba(192,56,75,0.12);
+    border: 1px solid rgba(192,56,75,0.35);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    color: var(--rose);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  #music-btn:hover { background: rgba(192,56,75,0.22); transform: scale(1.04); }
+  #music-icon { font-size: 18px; }
+  #music-upload { display: none; }
+
+  /* ── Section base ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    background: radial-gradient(ellipse at 50% 0%, #ffe4ea 0%, var(--cream) 65%);
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--deep);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1.1s 0.6s forwards;
+  }
+  .hero-headline em { font-style: italic; color: var(--rose); }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 7vw, 72px);
+    font-weight: 600;
+    color: var(--rose);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1.1s 0.9s forwards;
+  }
+
+  .score-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, #c9a84c 0%, #e8c96b 50%, #c9a84c 100%);
+    color: #2a1a00;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 600;
+    padding: 18px 48px;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 40px rgba(201,168,76,0.45), 0 0 0 6px rgba(201,168,76,0.12);
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards, shimmer 3s 2.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { box-shadow: 0 4px 40px rgba(201,168,76,0.45), 0 0 0 6px rgba(201,168,76,0.12); }
+    50% { box-shadow: 0 4px 60px rgba(201,168,76,0.7), 0 0 0 10px rgba(201,168,76,0.2); }
+  }
+
+  .hero-from {
+    font-size: 18px;
+    color: var(--muted);
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+  .hero-from span { color: var(--rose); font-weight: 400; }
+
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); opacity: 0;
+    animation: fadeUp 1s 2s forwards;
+  }
+  .scroll-arrow { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--rose), transparent); margin: 0 auto; animation: scrollPulse 2s 2.5s infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.15)} }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 16px 0;
+  }
+  .divider-line { flex: 1; max-width: 200px; height: 0.5px; background: var(--rose-light); }
+  .divider-diamond { font-size: 14px; color: var(--gold); }
+
+  /* ── Sections shared ── */
+  .section-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  .section-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--deep);
+    margin-bottom: 32px;
+  }
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  .prose {
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.85;
+    color: var(--text);
+    max-width: 700px;
+  }
+  .prose p { margin-bottom: 20px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--rose); font-weight: 400; }
+
+  /* ── Congrats section ── */
+  .congrats-section {
+    background: var(--blush);
+    border-top: 0.5px solid var(--rose-light);
+    border-bottom: 0.5px solid var(--rose-light);
+  }
+
+  /* ── Stats cards ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 48px 0;
+  }
+  .stat-card {
+    background: white;
+    border: 0.5px solid var(--rose-light);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(192,56,75,0.1); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--rose);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    display: block;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* ── Quote block ── */
+  .quote-block {
+    background: var(--deep);
+    color: white;
+    padding: 64px 40px;
+    border-radius: 24px;
+    text-align: center;
+    margin: 48px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-block::before {
+    content: '"';
+    position: absolute; top: -20px; left: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px; color: rgba(255,255,255,0.04);
+    line-height: 1; pointer-events: none;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: white;
+    max-width: 640px;
+    margin: 0 auto 20px;
+    position: relative; z-index: 1;
+  }
+  .quote-author {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+
+  /* ── NEET Motivation ── */
+  .neet-section { background: white; }
+
+  .steps-list {
+    list-style: none;
+    counter-reset: steps;
+    margin-top: 40px;
+  }
+  .steps-list li {
+    counter-increment: steps;
+    display: flex; gap: 24px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--rose-light);
+  }
+  .steps-list li:last-child { border-bottom: none; margin-bottom: 0; }
+  .step-num {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--blush);
+    border: 1px solid var(--rose-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .step-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+  .step-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* ── Romantic message ── */
+  .romantic-section {
+    background: linear-gradient(160deg, var(--deep) 0%, #4a0e20 100%);
+    color: white;
+    padding: 100px 24px;
+    text-align: center;
+  }
+  .romantic-section .section-tag { color: var(--gold-light); }
+  .romantic-section .section-title { color: white; }
+  .romantic-section .section-title em { color: var(--rose-light); }
+  .romantic-section .prose { color: rgba(255,255,255,0.85); margin: 0 auto; }
+  .romantic-section .prose strong { color: var(--rose-light); }
+
+  .hearts-row {
+    display: flex; justify-content: center; gap: 12px;
+    font-size: 28px;
+    margin: 40px 0 24px;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+  @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 0.5px solid var(--rose-light);
+    background: var(--cream);
+  }
+  footer .foot-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--rose);
+    font-style: italic;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Floating rose petals ── */
+  .petal {
+    position: fixed;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 0;
+    animation: petalFall linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(-40px) rotate(0deg); opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* responsive */
+  @media(max-width:600px){
+    .quote-block { padding: 40px 24px; }
+    .steps-list li { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<canvas id="particles"></canvas>
+
+<!-- Music control -->
+<label id="music-btn" title="Click to upload & play a song">
+  <span id="music-icon">♪</span>
+  <span id="music-label">Add Song</span>
+  <input type="file" id="music-upload" accept="audio/*">
+</label>
+<audio id="bg-audio" loop></audio>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <p class="hero-eyebrow">✦ A Special Message For You ✦</p>
+  <h1 class="hero-headline">Con<em>gratulations</em></h1>
+  <div class="hero-name">Harmandeep 💖</div>
+  <div class="score-badge">🏆 94% in Class 12th Medical</div>
+  <p class="hero-from">with all the love in the world, from <span>Jaskirat Singh</span> 🌹</p>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══════════ CONGRATULATIONS ══════════ -->
+<section class="congrats-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-tag">✦ Achievement Unlocked ✦</span>
+      <h2 class="section-title">You made it look<br><em>absolutely beautiful.</em></h2>
+    </div>
+
+    <div class="reveal prose">
+      <p>
+        My dearest Harmandeep, <strong>94% in Class 12 Medical</strong> is not just a number —
+        it is proof of every late night, every chapter revised, every sacrifice made.
+        You carried the weight of your dreams with grace, and today those dreams shine back at you
+        in golden ink.
+      </p>
+      <p>
+        I watched you work through every difficult topic, every sleepless revision session,
+        and I want you to know — your dedication is <strong>the most beautiful thing I have ever seen.</strong>
+        This result is yours. You earned every single percentage point.
+      </p>
+    </div>
+
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <span class="stat-num">94</span>
+        <span class="stat-label">Percentage</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">✦</span>
+        <span class="stat-label">Top Performer</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Proud of You</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">1</span>
+        <span class="stat-label">Future Doctor</span>
+      </div>
+    </div>
+
+    <div class="quote-block reveal">
+      <p class="quote-text">"Success is not given — it is built, brick by brick, with patience, passion and love. You, Harmandeep, are building something extraordinary."</p>
+      <span class="quote-author">— Jaskirat, always by your side</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NEET MOTIVATION ══════════ -->
+<section class="neet-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-tag">✦ The Next Chapter ✦</span>
+      <h2 class="section-title">Now, let's conquer<br><em>NEET together.</em></h2>
+    </div>
+
+    <div class="reveal prose">
+      <p>
+        NEET is the gateway to the greatest calling — <strong>saving lives, healing pain, being the hope
+        someone prays for.</strong> You have already proven with 94% that you have what it takes.
+        Now it's time to channel that same fire into your NEET preparation.
+      </p>
+    </div>
+
+    <ul class="steps-list reveal">
+      <li>
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Believe in your foundation</h3>
+          <p>Your 94% in Class 12 means your concepts are strong. Physics, Chemistry, and Biology — you have built the base. NEET rewards exactly what you have been doing: deep understanding, not shortcuts.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Make NCERT your best friend</h3>
+          <p>Every single NEET topper says the same thing — NCERT is the bible. Read it cover to cover, underline everything, internalize the diagrams. NCERT Biology alone can give you 300+ marks.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Solve past 10 years of papers</h3>
+          <p>NEET follows patterns. The more past papers you solve, the more you understand how questions are framed. Aim to finish all PYQs at least twice — with full analysis of every mistake.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Revise, revise, revise</h3>
+          <p>In NEET, revision beats new learning. Create short notes for every chapter. Use the spaced repetition method — your brain retains what it sees repeatedly. Weekly revision cycles are non-negotiable.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>Mock tests every week</h3>
+          <p>Simulate exam conditions every single week. Time yourself strictly. Analyse your score patterns. Identify your weak areas and target them ruthlessly. Mock tests are not practice — they are war preparation.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <h3>Rest is part of the strategy</h3>
+          <p>A tired brain cannot retain. Sleep 7-8 hours. Eat nourishing meals. Take short walks. Your mind is the most powerful instrument you have — treat it with care, not punishment.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <h3>Remember WHY you chose medicine</h3>
+          <p>On the hard days, come back to your purpose. Imagine the white coat, the stethoscope around your neck, a patient looking at you with trust. That image is worth every sacrifice. <strong>You were born for this.</strong></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ DIVIDER ══════════ -->
+<div class="divider" style="padding:0; background:var(--blush); border-top:0.5px solid var(--rose-light); border-bottom:0.5px solid var(--rose-light);">
+  <div class="divider-line"></div>
+  <span class="divider-diamond" style="font-size:22px; padding:20px 12px;">❀ ✦ ❀</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ══════════ ROMANTIC MESSAGE ══════════ -->
+<section class="romantic-section">
+  <div style="max-width:760px; margin:0 auto;">
+    <span class="section-tag reveal">✦ From My Heart ✦</span>
+    <h2 class="section-title reveal">You are my <em>greatest</em><br>inspiration, Harmandeep.</h2>
+
+    <div class="hearts-row reveal">💖 🌹 💖 🌹 💖</div>
+
+    <div class="reveal prose">
+      <p>
+        Watching you study with such <strong>devotion and fire</strong> makes me fall in love with you
+        more every single day. You are not just chasing a degree — you are chasing a purpose,
+        and that makes you the most beautiful person I know.
+      </p>
+      <p>
+        On days when the syllabus feels endless, when a chapter refuses to go into your head,
+        when exhaustion weighs heavy — please remember: <strong>I am here.</strong>
+        Every question you study, every revision you do, I am cheering for you with my whole heart.
+      </p>
+      <p>
+        The day you wear that white coat and someone calls you <strong>Dr. Harmandeep</strong> —
+        I will be the proudest person in the entire world. Not because of the title,
+        but because I have seen the journey. I have seen the girl behind the achievement.
+        And she is <strong>extraordinary.</strong>
+      </p>
+      <p>
+        I love you. Study hard. Dream big. The future you are building is going to be
+        <strong>absolutely magnificent.</strong> 🌹
+      </p>
+    </div>
+
+    <div style="margin-top:56px; opacity:0.6; font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--rose-light);" class="reveal">
+      — Your Jaskirat Singh 💞
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <span class="foot-name">Harmandeep 💖</span>
+  <p style="margin-bottom:8px;">94% ✦ Class 12 Medical ✦ Future Doctor</p>
+  <p style="font-size:13px; opacity:0.6;">Made with infinite love by Jaskirat Singh 🌹</p>
+</footer>
+
+<script>
+// ── Floating hearts/petals animation on canvas
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const EMOJIS = ['🌹','💖','✨','🌸','💕','❤️','🌺'];
+
+function spawnParticle(){
+  return {
+    x: Math.random() * W,
+    y: -40,
+    emoji: EMOJIS[Math.floor(Math.random()*EMOJIS.length)],
+    size: 14 + Math.random()*12,
+    speed: 0.6 + Math.random()*1.2,
+    drift: (Math.random()-0.5)*0.8,
+    rotation: Math.random()*360,
+    rotSpeed: (Math.random()-0.5)*2,
+    opacity: 0.5 + Math.random()*0.4
+  };
+}
+
+for(let i=0;i<18;i++){
+  let p = spawnParticle();
+  p.y = Math.random()*H;
+  particles.push(p);
+}
+
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  if(Math.random()<0.03 && particles.length < 35) particles.push(spawnParticle());
+
+  particles.forEach((p,i)=>{
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.font = p.size+'px serif';
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation*Math.PI/180);
+    ctx.fillText(p.emoji, -p.size/2, p.size/2);
+    ctx.restore();
+    p.y += p.speed;
+    p.x += p.drift;
+    p.rotation += p.rotSpeed;
+    if(p.y > H+60) particles[i] = spawnParticle();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ── Scroll reveal
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Music player
+const audioEl = document.getElementById('bg-audio');
+const musicBtn = document.getElementById('music-btn');
+const musicLabel = document.getElementById('music-label');
+const musicIcon = document.getElementById('music-icon');
+const fileInput = document.getElementById('music-upload');
+let playing = false;
+
+fileInput.addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  audioEl.src = url;
+  audioEl.play().then(()=>{
+    playing = true;
+    musicLabel.textContent = 'Pause ♪';
+    musicIcon.textContent = '♫';
+  }).catch(()=>{});
+  musicLabel.textContent = file.name.replace(/\.[^.]+$/,'').slice(0,18)+'…';
+});
+
+musicBtn.addEventListener('click', e=>{
+  if(!audioEl.src) return;
+  e.preventDefault();
+  if(playing){
+    audioEl.pause();
+    playing = false;
+    musicLabel.textContent = 'Play ♪';
+    musicIcon.textContent = '♪';
+  } else {
+    audioEl.play();
+    playing = true;
+    musicLabel.textContent = 'Pause ♪';
+    musicIcon.textContent = '♫';
+  }
+});
+
+// prevent label click from triggering file dialog when audio is loaded
+musicBtn.addEventListener('click', e=>{
+  if(audioEl.src){
+    e.preventDefault(); // handled above, don't open file dialog again
+  }
+});
+</script>
+</body>
+</html>
